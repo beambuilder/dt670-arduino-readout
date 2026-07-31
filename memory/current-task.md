@@ -2,7 +2,9 @@
 
 **Full measurement chain works end-to-end (bench, dummy diode).** Next: hardware polish, then real DT-670 installation + verification.
 
-## State (as of 2026-07-30, evening session)
+## State (as of 2026-07-31)
+
+- **Excitation current verified at diode seat 2026-07-31: 10.5 µA** (DMM µA across F+ → GND, empty seat — valid, LM334 true current source). Within 9.4–10.9 µA window, no re-trim. Cleared for real DT-670 install. See [[analog-frontend]].
 
 - **Main firmware `firmware/dt670srv/` written, flashed, verified.** ADS1115 diff A0−A1 (±2.048 V, 64-sample avg @ 860 SPS), Lake Shore DT-670 curve (49 breakpoints, 50–440 K, from official datasheet) in PROGMEM, HTTP/JSON on `http://192.168.2.2/` ([[0005-http-json-protocol]]). Response: `{"v":0.40000,"t_k":368.51,"t_c":95.36,"flag":"ok","age_ms":7}`. Flags: ok/open/reversed/out_of_range. Serial mirror 115200.
 - **Python live plot works:** `python/liveplot.py` (Panel+HoloViews, 2 Hz poll, browser at localhost:5006). See [[python-readout]]. Run: `conda activate base`, `python python\liveplot.py`.
@@ -16,6 +18,6 @@
 
 ## Next step (cold-session executable)
 
-1. Swap 1N4004 → real DT-670 (ESD precautions, ≤1 mA abs max; polarity per [[wiring-feedthrough]]). Room-temp sanity: expect ~0.56 V / ~298 K on the live plot.
+1. Swap 1N4004 → real DT-670 (ESD precautions, ≤1 mA abs max; polarity per [[wiring-feedthrough]]). Current already verified 10.5 µA at seat. Room-temp sanity: expect ~0.56 V / ~298 K on the live plot.
 2. Optional validation per [[parts-and-assembly]]: ice-water bath → 273.15 K ±1–2 K; LN2 dip → 77.4 K ≈ 1.02 V.
 3. Then: mount in chamber, route through feedthrough.

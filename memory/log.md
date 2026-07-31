@@ -9,3 +9,5 @@
 ## [2026-07-30] checkpoint | Chain works end-to-end: dt670srv firmware (HTTP/JSON, ADR 0005) + Python live plot; series-wired 100 nF sense caps found & fixed (shunt to GND). Next: decoupling caps, real DT-670. Session: [[2026-07-30-main-firmware-liveplot-rc-fix]]
 
 ## [2026-07-31] checkpoint | Repo public on GitHub; 10 µF+100 nF decoupling placed + A/B noise test (noisecap tooling) — fast noise unchanged ≈16 mK, caps kept for robustness. Next: real DT-670. Session: [[2026-07-31-repo-publish-elko-ab-noise]]
+
+## [2026-07-31] checkpoint | Seat current verified: 10.5 µA across F+→GND (DMM µA, empty seat) — in window, no re-trim. Cleared for real DT-670 install. Session: [[2026-07-31-seat-current-check]]

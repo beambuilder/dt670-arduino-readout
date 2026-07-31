@@ -26,6 +26,7 @@ DT-670 CATHODE (−) ─► F− ───────────────�
 - Keep resistor chain physically close to LM334 legs (chip regulates only ~68 mV).
 - **Calibrated 2026-07-30 (bench, 1N4004 stand-in diode):** exact-current trim = measure across the **fixed 6.2 kΩ alone** and set trimmer for **62.0 mV → 10.00 µA** (independent of unknown trimmer resistance). Chain voltage (R↔V− legs) stays ~65 mV at any trimmer position — LM334 forces the reference; trimmer changes current, not voltage. Use as regulation sanity check.
 - Bench reference values, 1N4004 test diode: **~0.40 V at 10 µA** (healthy); **~0.57 V at ~550 µA** (reversed-LM334 fault signature); **~4.5 V across empty diode seat** = normal open-load compliance, proves wiring, NOT a fault.
+- **Seat-current check (2026-07-31): DMM in µA mode directly across empty diode seat (F+ → GND) read 10.5 µA** — valid method because LM334 is a true current source (DMM burden voltage ≪ 4 V headroom). 10.5 µA is within the 9.4–10.9 µA trim window; +5 % vs nominal 10 µA shifts the diode voltage only ~1–2 mV (≪ ±5 K budget), no re-trim needed. Cleared for real DT-670 install. Most precise cross-check remains 62.0 mV across the fixed 6.2 kΩ = 10.00 µA.
 
 ## Quirks & gotchas
 
