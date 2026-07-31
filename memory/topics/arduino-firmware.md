@@ -15,6 +15,7 @@ Firmware for Uno R3 + Ethernet Shield 2 (W5500). **Main sketch `firmware/dt670sr
 - `firmware/pingtest/` — W5500 bring-up, static IP **192.168.2.2**, `Ethernet.init(10)` (CS pin 10 on Shield 2). Flashed + ping verified end-to-end.
 - `firmware/adstest/` — ADS1115 differential A0−A1 over serial. Superseded by adsdiag for debugging.
 - `firmware/adsdiag/` — **keep for frontend debugging:** prints A0..A3 single-ended vs GND + diff01 once/s. Floating input reads ≈0.26 V bias; identical decaying values on two channels = common/floating node. Found the series-cap fault (see [[analog-frontend]]).
+- `firmware/noisecap/` — raw noise capture: diff A0−A1, GAIN_TWO, 860 SPS continuous, sampled at 200 Hz, `t_us,raw` CSV over serial 115200. Pairs with `python/noisecap.py` (logger) + `python/noisecompare.py` (stats/plot). Used for the 2026-07-31 decoupling A/B test (see [[analog-frontend]]).
 
 ## Toolchain & network (working setup, 2026-07-30)
 
@@ -42,6 +43,7 @@ Firmware for Uno R3 + Ethernet Shield 2 (W5500). **Main sketch `firmware/dt670sr
 
 - `RESOLVED (2026-07-30)` — `arduino-cli` invisible to Claude's PowerShell (PATH); use full path `C:\Program Files\Arduino CLI\arduino-cli.exe`.
 - `ANTICIPATED` — Flashing any sketch replaces dt670srv → live plot shows "no response" until reflashed. Reflash: `upload -p COM5 --fqbn arduino:avr:uno firmware/dt670srv`.
+- `RESOLVED (2026-07-31)` — COM5 can silently vanish (upload fails `cannot open port \\.\COM5`): USB cable was plugged but Uno not enumerated. Check `[System.IO.Ports.SerialPort]::GetPortNames()`; `Get-PnpDevice` status "Unknown" = previously seen, not currently present. Fix: replug USB.
 
 ## Links
 
