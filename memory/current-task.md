@@ -12,11 +12,10 @@
 
 ## Blockers / open questions
 
-- None blocking. Pending hardware polish: **10 µF electrolytic (+ leg to 5 V) + 100 nF rail decoupling near LM334** — ordered, not yet placed.
+- None blocking. ~~10 µF + 100 nF decoupling~~ **placed + A/B noise-tested 2026-07-31** — no noise change on bench (see [[analog-frontend]], `data/noise_compare.png`); kept in for supply robustness. Repo now public: https://github.com/beambuilder/dt670-arduino-readout.
 
 ## Next step (cold-session executable)
 
-1. Place 10 µF + 100 nF decoupling across 5 V/GND near LM334 (+ leg of elco to 5 V).
-2. Swap 1N4004 → real DT-670 (ESD precautions, ≤1 mA abs max; polarity per [[wiring-feedthrough]]). Room-temp sanity: expect ~0.56 V / ~298 K on the live plot.
-3. Optional validation per [[parts-and-assembly]]: ice-water bath → 273.15 K ±1–2 K; LN2 dip → 77.4 K ≈ 1.02 V.
-4. Then: mount in chamber, route through feedthrough.
+1. Swap 1N4004 → real DT-670 (ESD precautions, ≤1 mA abs max; polarity per [[wiring-feedthrough]]). Room-temp sanity: expect ~0.56 V / ~298 K on the live plot.
+2. Optional validation per [[parts-and-assembly]]: ice-water bath → 273.15 K ±1–2 K; LN2 dip → 77.4 K ≈ 1.02 V.
+3. Then: mount in chamber, route through feedthrough.
