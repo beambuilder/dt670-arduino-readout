@@ -1,0 +1,8 @@
+# Gotchas (cross-cutting)
+
+Topic-specific quirks live on topic pages; only cross-cutting / catastrophic traps here.
+
+- `ANTICIPATED` — **Sensor-destroying mistake:** direct wire/solder bridge between LM334 R and V− pins → R_set = 0 → up to 10 mA through DT-670 (abs max 1 mA) → sensor destroyed. R and V− join ONLY through the 6.2 kΩ + trimmer chain. Fix: visually verify chain before ever connecting the sensor; trim current sensorless first ([[parts-and-assembly]] step 2).
+- `ANTICIPATED` — Never exceed 1 mA through the DT-670; ESD precautions while soldering it.
+- `RESOLVED (2026-07-30)` — **Anaconda base env broken by numpy 2.4.6:** pandas 2.0.3 / panel 1.2.3 imports crashed with `numpy.dtype size changed, may indicate binary incompatibility`. Fixed by pinning `numpy<2` (1.26.4) via `& C:\Users\Niclas\anaconda3\python.exe -m pip install "numpy<2"`. Don't upgrade numpy to 2.x in base without rebuilding pandas/numba. Note: `conda run -n base pip …` fails ("Das System kann die angegebene Datei nicht finden") — call base `python.exe -m pip` directly.
+- `RESOLVED (2026-07-30)` — **ADS1115 read ~0 V while diode showed 0.40 V: 100 nF filter caps wired IN SERIES between 1 kΩ and A0/A1** — cap blocks DC, inputs floated (ghost 0.4 V decaying, identical A0/A1, all continuity "open"; across the series cap the ohmmeter shows single-digit MΩ leakage, easily mistaken for a bad resistor). Correct: caps SHUNT from ADS-pin node to GND (RC low-pass ≈1.6 kHz). Debug path that found it: `firmware/adsdiag` single-ended prints (floating inputs ≈0.26 V bias; identical decaying values = common/floating node) + unpowered continuity ladder. Rule: never measure resistance on the powered circuit.
